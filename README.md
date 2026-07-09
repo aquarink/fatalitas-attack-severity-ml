@@ -12,6 +12,10 @@ Eksperimen klasifikasi tingkat fatalitas serangan berbasis teks dengan fokus pad
   Pencarian ringan di sekitar resep notebook untuk menyamai atau menurunkan error rate baseline.
 - `search_alternative_baselines.py`
   Perbandingan model dan kombinasi lain dengan preprocessing dan split yang sama seperti baseline notebook.
+- `run_best_alternative_baseline.py`
+  Menjalankan langsung baseline alternatif terbaik saat ini, yaitu `LinearSVC`.
+- `sweep_focused_alternatives.py`
+  Sweep terfokus di sekitar `LinearSVC`, `ComplementNB`, dan ensemble ringan untuk mengejar error rate yang lebih rendah.
 - `fatalitas_core.py`
   Utilitas bersama untuk preprocessing, evaluasi, dan helper model.
 - `run_single_models.py`
@@ -138,7 +142,29 @@ Output:
 - `results/alternative_baselines_results.csv`
 - `results/alternative_baselines_best.json`
 
-### 4. Jalankan kajian komparatif model tunggal
+### 4. Jalankan baseline alternatif terbaik saat ini
+
+```bash
+python3 run_best_alternative_baseline.py
+```
+
+Output:
+
+- `results/best_alternative_baseline_metrics.json`
+- `results/best_alternative_baseline_report.txt`
+
+### 5. Sweep terfokus untuk mencoba menurunkan error rate lebih jauh
+
+```bash
+python3 sweep_focused_alternatives.py
+```
+
+Output:
+
+- `results/focused_alternative_sweep_results.csv`
+- `results/focused_alternative_sweep_best.json`
+
+### 6. Jalankan kajian komparatif model tunggal
 
 ```bash
 python3 run_single_models.py
@@ -148,7 +174,7 @@ Output:
 
 - `results/single_models_results.csv`
 
-### 5. Jalankan kajian komparatif ensemble
+### 7. Jalankan kajian komparatif ensemble
 
 ```bash
 python3 run_ensemble_models.py
@@ -158,7 +184,7 @@ Output:
 
 - `results/ensemble_models_results.csv`
 
-### 6. Jalankan baseline BERT opsional
+### 8. Jalankan baseline BERT opsional
 
 ```bash
 python3 run_bert_baseline.py
@@ -172,6 +198,8 @@ Output:
 
 - Dataset relatif kecil dan imbalanced.
 - Accuracy tinggi tidak selalu berarti model baik di semua kelas.
+- Baseline notebook direproduksi sebagai referensi holdout, lalu dibandingkan dengan baseline alternatif yang memakai resep preprocessing dan split yang sama.
+- Sweep terfokus pada `LinearSVC`, `ComplementNB`, dan ensemble ringan disediakan untuk mencari konfigurasi holdout yang lebih rendah dari baseline awal.
 - Untuk pelaporan akademik, gunakan juga:
   - `macro F1`
   - `balanced accuracy`
