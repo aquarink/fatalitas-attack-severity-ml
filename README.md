@@ -107,7 +107,7 @@ brew install libomp
 Masuk ke folder proyek:
 
 ```bash
-cd "/Volumes/SSD 850/PROJECTS/fatalitas"
+cd fatalitas-attack-severity-ml
 ```
 
 ### 1. Reproduksi baseline notebook
